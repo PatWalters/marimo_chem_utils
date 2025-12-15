@@ -44,3 +44,20 @@ chart = interactive_chart(df, x_col="TSNE_x", y_col="TSNE_y", color_col="PIC50",
 ```
 
 This will create a `pandas.DataFrame` with additional columns for fingerprints, images, and InChI keys, and then generate an interactive t-SNE plot that you can explore in your marimo notebook. The plot will display molecule images in the tooltips.
+
+## Examples
+
+The `examples` directory contains marimo notebooks that demonstrate how to use `marimo-chem-utils`. You can run them from the command line.
+
+- **scatterplot.py**: An interactive scatterplot that shows chemical structures as tooltips. Selections on the plot are used to display a grid of molecules.
+
+```bash
+marimo run examples/scatterplot.py
+```
+
+- **clustering.py**: An example of clustering molecules and viewing the cluster members.
+
+```bash
+marimo run examples/clustering.py
+```
+
