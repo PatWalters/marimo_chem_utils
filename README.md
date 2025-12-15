@@ -52,12 +52,12 @@ The `examples` directory contains marimo notebooks that demonstrate how to use `
 - **scatterplot.py**: An interactive scatterplot that shows chemical structures as tooltips. Selections on the plot are used to display a grid of molecules.
 
 ```bash
-marimo run examples/scatterplot.py
+marimo edit examples/scatterplot.py
 ```
 
 - **clustering.py**: An example of clustering molecules and viewing the cluster members.
 
 ```bash
-marimo run examples/clustering.py
+marimo edit examples/clustering.py
 ```
 
