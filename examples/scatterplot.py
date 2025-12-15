@@ -1,3 +1,11 @@
+# /// script
+# requires-python = ">=3.11"
+# dependencies = [
+#     "marimo",
+#     "marimo-chem-utils==0.1.2",
+#     "pandas==2.3.3",
+# ]
+# ///
 import marimo
 
 __generated_with = "0.17.7"
