@@ -1,0 +1,61 @@
+Metadata-Version: 2.4
+Name: marimo-chem-utils
+Version: 0.1.2
+Summary: A collection of cheminformatics utility functions for use with marimo notebooks.
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: marimo>=0.18.3
+Requires-Dist: pandas>=2.3.3
+Requires-Dist: rdkit>=2025.9.3
+Requires-Dist: scikit-learn>=1.7.2
+Requires-Dist: useful-rdkit-utils>=0.93
+Requires-Dist: altair>=5.3.0
+Provides-Extra: test
+Requires-Dist: pytest; extra == "test"
+
+# marimo-chem-utils
+
+A collection of cheminformatics utility functions for use with [marimo](https://marimo.io/), an open-source reactive notebook for Python.
+
+## Installation
+
+You can install `marimo-chem-utils` using `pip`:
+
+```bash
+pip install marimo-chem-utils
+```
+
+## Usage
+
+Here is an example of how to use some of the functions in this library.
+
+```python
+import pandas as pd
+import marimo as mo
+from marimo_chem_utils import (
+    add_fingerprint_column,
+    add_image_column,
+    add_inchi_key_column,
+    add_tsne_columns,
+    interactive_chart
+)
+
+# Load some data
+df = pd.read_csv("https://raw.githubusercontent.com/PatWalters/datafiles/refs/heads/main/carbonic.csv")
+
+# Add fingerprints, images, and InChI keys
+df = add_fingerprint_column(df, fp_type="counts_fp")
+df = add_image_column(df, smiles_column="SMILES")
+df = add_inchi_key_column(df, smiles_column="SMILES")
+
+# Generate t-SNE coordinates
+df = add_tsne_columns(df)
+
+# Create an interactive plot
+chart = interactive_chart(df, x_col="TSNE_x", y_col="TSNE_y", color_col="PIC50", image_col="image")
+
+# In a marimo cell, you would display the chart like this:
+# mo.ui.altair_chart(chart)
+```
+
+This will create a `pandas.DataFrame` with additional columns for fingerprints, images, and InChI keys, and then generate an interactive t-SNE plot that you can explore in your marimo notebook. The plot will display molecule images in the tooltips.
