@@ -14,6 +14,7 @@ import marimo as mo
 import numpy as np
 from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
+from rdkit.Chem import rdDepictor
 
 
 def add_fingerprint_column(df: pd.DataFrame, column_name: str = None, fp_type: str = "counts_fp",
@@ -95,6 +96,7 @@ def draw_molecule_grid(df: pd.DataFrame, smiles_column: str = "SMILES", legend_c
     Returns:
         A PIL Image object containing the grid.
     """
+    rdDepictor.SetPreferCoordGen(True)
     df_to_show = df.head(max_to_show)
     smiles_list = df_to_show[smiles_column].tolist()
     mol_list = [Chem.MolFromSmiles(smiles) for smiles in smiles_list]
