@@ -1,6 +1,6 @@
 [project]
 name = "marimo-chem-utils"
-version = "0.2.0"
+version = "0.2.4"
 description = "A collection of cheminformatics utility functions for use with marimo notebooks."
 readme = "README.md"
 requires-python = ">=3.11"

@@ -59,8 +59,9 @@ def add_image_column(df: pd.DataFrame, image_column: str = "image", smiles_colum
         DataFrame with the added image column.
     """
     tqdm.pandas()
-    image_list = df[smiles_column].progress_apply(uru.smi_to_base64_image, target='altair')
-    df.insert(0, image_column, image_list)  # insert at the beginning of the dataframe
+    if image_column not in df.columns:
+        image_list = df[smiles_column].progress_apply(uru.smi_to_base64_image, target='altair')
+        df.insert(0, image_column, image_list)  # insert at the beginning of the dataframe
     return df
 
 
@@ -80,8 +81,13 @@ def smi2inchi_key(smiles: str) -> Optional[str]:
     return None
 
 
-def draw_molecule_grid(df: pd.DataFrame, smiles_column: str = "SMILES", legend_column: str = None, num_cols: int = 5,
-                       image_size: Tuple[int, int] = (200, 200), max_to_show: int = 25) -> Image.Image:
+def draw_molecule_grid(df: pd.DataFrame,
+                       smiles_column: str = "SMILES",
+                       smarts=None,
+                       legend_column: str = None,
+                       num_cols: int = 5,
+                       image_size: Tuple[int, int] = (200, 200),
+                       max_to_show: int = 25) -> Image.Image:
     """
     Draws a grid of molecules from a DataFrame.
 
@@ -100,10 +106,17 @@ def draw_molecule_grid(df: pd.DataFrame, smiles_column: str = "SMILES", legend_c
     df_to_show = df.head(max_to_show)
     smiles_list = df_to_show[smiles_column].tolist()
     mol_list = [Chem.MolFromSmiles(smiles) for smiles in smiles_list]
+    match_list = []
+    if smarts is not None:
+        pat = Chem.MolFromSmarts(smarts)
+        match_list = [mol.GetSubstructMatch(pat) if mol is not None else () for mol in mol_list]
     legend_list = []
     if legend_column is not None:
-        legend_list = [f"{x:.2f}" for x in df_to_show[legend_column].tolist()]
-    mol_grid = Draw.MolsToGridImage(mol_list, molsPerRow=num_cols, subImgSize=image_size, legends=legend_list)
+        if df_to_show[legend_column].dtype == float:
+            legend_list = [f"{x:.2f}" for x in df_to_show[legend_column].tolist()]
+        else:
+            legend_list = [str(x) for x in df_to_show[legend_column]]
+    mol_grid = Draw.MolsToGridImage(mol_list, molsPerRow=num_cols, subImgSize=image_size, legends=legend_list, highlightAtomLists=match_list)
     return mol_grid
 
 
