@@ -6,9 +6,10 @@
 #     "pandas==2.3.3",
 # ]
 # ///
+
 import marimo
 
-__generated_with = "0.17.7"
+__generated_with = "0.19.1"
 app = marimo.App(width="medium")
 
 
@@ -24,7 +25,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    Import the necessary Python libraries
+    ### 1. Import the Necessary Python libraries
     """)
     return
 
@@ -40,6 +41,7 @@ def _():
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
+    ### 2. Read the Input Data
     Read data from a csv file and sort by the pIC50 column.  The data is from a 2018 paper by [Isidro Cortés-Ciriano and Andreas Bender](https://pubs.acs.org/doi/10.1021/acs.jcim.8b00542).
     """)
     return
@@ -55,6 +57,7 @@ def _(pd):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
+    ### 4. Add Chemical Structure Images to the Dataframe
     Use the function `add_image_column` from `marimo_chem_utils` to add a chemical structure image to the dataframe. Note that a larger version of the structure appears as a tooltip when you hold the mouse over the image in the table.
     """)
     return
@@ -76,6 +79,7 @@ def _(df):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
+    ### 5. Calculate TNSE Coordinates for the Compounds
     Use the function `add_tnse_columns` from `marimo_chem_utils` to add two columns 'TSNE_x' and 'TSNE_y' to the datframe.  These columns are caculated by:
     - Generating a Morgan count fingerprint using the RDKit
     - Using PCA to reduce the fingerprint to 50 dimensions
@@ -93,7 +97,7 @@ def _(df, mcu):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    Generate an interactive scatterplot
+    ### 6. Generate an Interactive Scatterplot
     """)
     return
 

@@ -1,6 +1,7 @@
 # /// script
 # requires-python = ">=3.11"
 # dependencies = [
+#     "marimo>=0.19.1",
 #     "marimo-chem-utils==0.2.2",
 #     "pandas==2.3.3",
 #     "rdkit==2025.9.3",

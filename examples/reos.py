@@ -2,8 +2,8 @@
 # requires-python = ">=3.8"
 # dependencies = [
 #   "marimo",
-#   "pandas==2.3.1",
-#   "rdkit==2025.3.3",
+#   "pandas==2.3.3",
+#   "rdkit==2025.9.3",
 #   "useful-rdkit-utils==0.96",
 #   "marimo-chem-utils==0.2.4"
 # ]
@@ -11,7 +11,7 @@
 
 import marimo
 
-__generated_with = "0.18.4"
+__generated_with = "0.19.1"
 app = marimo.App(width="full")
 
 
@@ -27,7 +27,7 @@ def _(mo):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    First, we'll import the necessary Python libraries.
+    ### 1. Import the Necessary Python Libraries
     """)
     return
 
@@ -45,6 +45,7 @@ def _():
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
+    ### 2. Define a Support Fuctions
     Define a quick function to return the SMILES for the largest fragment in a molecule.
     """)
     return
@@ -65,7 +66,7 @@ def _(Chem, uru):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    ##### Read and process a SMILES file.
+    ### 3. Read and process a SMILES file.
     1. Read the SMILES file into a Pandas dataframe.
     2. Use the function we defined above to remove counterions, waters of hydration, etc.
     """)
@@ -83,20 +84,23 @@ def _(pd, strip_salts):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    Instantiate a REOS object.
+    ### 4. Instantiate a REOS object.
+
+    We will use the BMS rules with our REOS object.
     """)
     return
 
 
 @app.cell
 def _(uru):
-    reos = uru.REOS(["PW"])
+    reos = uru.REOS(["BMS"])
     return (reos,)
 
 
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
+    ### 5. Filter the Structures
     Run the filters on the dataframe `df`.  This applies the REOS SMARTS patterns to each of the SMILES in the dataframe.
     """)
     return
@@ -113,6 +117,7 @@ def _(df, reos):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
+    ### 6. Create a Summary Dataframe
     Create a new dataframe with a summary of the REOS run.
     """)
     return
@@ -135,6 +140,7 @@ def _(reos_summary_df):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
+    ### 7. Set Up the Interactive Viewer
     With `reos_summary_df` in hand, we can use Marimo's `table` component to create an interactive viewer.  First, we'll pass the list of REOS filters that were triggered by the dataset and use this to create a table we can use to make selections.  To limit selections to only one row at a time, we set the `selection` parameter for the table to `single`.
     """)
     return
@@ -161,7 +167,7 @@ def _(df, left_table, mcu, mo, reos_summary_df):
         selected_rule = left_table.value.description.values[0]
         grid_df = df.query(f"reos == '{selected_rule}'").head(12)
         reos_smarts = reos_summary_df.query(f"description == '{selected_rule}'").SMARTS.values[0]
-        right_grid = mcu.draw_molecule_grid(grid_df,num_cols=4)
+        right_grid = mcu.draw_molecule_grid(grid_df,num_cols=4,smarts=reos_smarts)
     else:
         right_grid = mo.md("Please make a selection from the table on the left")
     return (right_grid,)
@@ -170,6 +176,7 @@ def _(df, left_table, mcu, mo, reos_summary_df):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
+    ### 8. View the Results
     This is an interactive grid for viewing the results of the REOS calculation.  Clicking on a checkbox in the table on the left shows the structures that matched the query in the panel on the right.  The substructure matching the REOS rule is highlighted.
     """)
     return
