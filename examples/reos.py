@@ -4,7 +4,8 @@
 #   "marimo",
 #   "pandas==2.3.1",
 #   "rdkit==2025.3.3",
-#   "useful-rdkit-utils==0.89",
+#   "useful-rdkit-utils==0.96",
+#   "marimo-chem-utils==0.2.4"
 # ]
 # ///
 
@@ -160,7 +161,7 @@ def _(df, left_table, mcu, mo, reos_summary_df):
         selected_rule = left_table.value.description.values[0]
         grid_df = df.query(f"reos == '{selected_rule}'").head(12)
         reos_smarts = reos_summary_df.query(f"description == '{selected_rule}'").SMARTS.values[0]
-        right_grid = mcu.draw_molecule_grid(grid_df,num_cols=4,smarts=reos_smarts)
+        right_grid = mcu.draw_molecule_grid(grid_df,num_cols=4)
     else:
         right_grid = mo.md("Please make a selection from the table on the left")
     return (right_grid,)
