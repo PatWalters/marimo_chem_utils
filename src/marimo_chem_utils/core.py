@@ -84,6 +84,7 @@ def smi2inchi_key(smiles: str) -> Optional[str]:
 def draw_molecule_grid(df: pd.DataFrame,
                        smiles_column: str = "SMILES",
                        smarts=None,
+                       template=None,
                        legend_column: str = None,
                        num_cols: int = 5,
                        image_size: Tuple[int, int] = (200, 200),
@@ -105,11 +106,17 @@ def draw_molecule_grid(df: pd.DataFrame,
     rdDepictor.SetPreferCoordGen(True)
     df_to_show = df.head(max_to_show)
     smiles_list = df_to_show[smiles_column].tolist()
-    mol_list = [Chem.MolFromSmiles(smiles) for smiles in smiles_list]
+    # Handle structure alignment
+    if template is not None:
+        mol_list = uru.align_mols_to_template(template, smiles_list)
+    else:
+        mol_list = [Chem.MolFromSmiles(smiles) for smiles in smiles_list]
+    # Handle SMARTS highlighting
     match_list = []
     if smarts is not None:
         pat = Chem.MolFromSmarts(smarts)
         match_list = [mol.GetSubstructMatch(pat) if mol is not None else () for mol in mol_list]
+    # Handle legends
     legend_list = []
     if legend_column is not None:
         if df_to_show[legend_column].dtype == float:

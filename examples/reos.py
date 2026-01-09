@@ -17,7 +17,7 @@ app = marimo.App(width="full")
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    ## REOS in a [marimo]() Notebook
+    ## REOS in a [marimo](https://marimo.io) Notebook
     This notebook provides a quick overview of how the [Rapid Elimination of Swill (REOS)](https://practicalcheminformatics.blogspot.com/2018/08/filtering-chemical-libraries.html) filters can be run in a Marimo notebook.  We'll take a look at how the [useful_rdkit_utils](https://patwalters.github.io/Useful-RDKit-Utils/) library and marimo's [table](https://docs.marimo.io/api/inputs/table/) capability can be used to create a quick interactive viewer.
     """)
     return
@@ -66,7 +66,7 @@ def _(mo):
     mo.md(r"""
     ##### Read and process a SMILES file.
     1. Read the SMILES file into a Pandas dataframe.
-    2. Use the function we defined about to remove counterions, waters of hydration, etc.
+    2. Use the function we defined above to remove counterions, waters of hydration, etc.
     """)
     return
 
@@ -169,7 +169,7 @@ def _(df, left_table, mcu, mo, reos_summary_df):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    This is an interactive grid for viewing the results of the REOS calculation.  Clicking on a checkbox in the table on the right shows the structures that matched the query in the panel on the right.  The substructure matching the REOS rule is highlighted.
+    This is an interactive grid for viewing the results of the REOS calculation.  Clicking on a checkbox in the table on the left shows the structures that matched the query in the panel on the right.  The substructure matching the REOS rule is highlighted.
     """)
     return
 
