@@ -10,6 +10,13 @@ You can install `marimo-chem-utils` using `pip`:
 pip install marimo-chem-utils
 ```
 
+## Demos
+| Demo      | Open in molab   |
+|----------|------------------|     
+Clustering | [![Open in molab](https://molab.marimo.io/molab-shield.svg)](https://molab.marimo.io/notebooks/nb_PdV6rZXyzjf4rjK6Swh7pi)
+| Scatterplot | [![Open in molab](https://molab.marimo.io/molab-shield.svg)](https://molab.marimo.io/notebooks/nb_Y24K3YNMmWXceCSkpZay5w)|
+| REOS Filtering |[![Open in molab](https://molab.marimo.io/molab-shield.svg)](https://molab.marimo.io/notebooks/nb_B7QL9g2moppK1TN2EsXH3o)|
+
 ## Usage
 
 Here is an example of how to use some of the functions in this library.
