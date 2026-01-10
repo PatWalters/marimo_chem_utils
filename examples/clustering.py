@@ -9,9 +9,10 @@
 #     "useful-rdkit-utils==0.93",
 # ]
 # ///
+
 import marimo
 
-__generated_with = "0.18.4"
+__generated_with = "0.19.1"
 app = marimo.App(width="medium")
 
 
@@ -57,7 +58,7 @@ def _(mo):
 
 @app.cell
 def _(mcu, pd, uru):
-    df = pd.read_csv("~/software/yamc/data/Carbonic.smi",sep=" ",names=["SMILES","Name","pIC50"])
+    df = pd.read_csv("https://raw.githubusercontent.com/PatWalters/datafiles/refs/heads/main/carbonic.csv")
     _ = mcu.add_fingerprint_column(df,fp_type="fp")
     df['cluster'] = uru.taylor_butina_clustering(df.fp)
     return (df,)
@@ -126,13 +127,13 @@ def _(Chem, aligned_df, cluster_rep_table, mo):
         selected_cluster_id = cluster_rep_table.value.cluster.values[0]
         cluster_grid_df = aligned_df.query(f"cluster == {selected_cluster_id}").head(12)
         legends = cluster_grid_df.Name.astype("str").tolist()
-        cluster_grid = Chem.Draw.MolsToGridImage(cluster_grid_df.mol.values.tolist(),molsPerRow=4,legends=legends)
+        cluster_grid = Chem.Draw.MolsToGridImage(cluster_grid_df.mol.values.tolist(),molsPerRow=3,legends=legends)
     else:
         cluster_grid = mo.md("Please make a selection from the table on the left")
     return (cluster_grid,)
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
     ### 6. Combine the Two Views
@@ -142,7 +143,7 @@ def _(mo):
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(cluster_grid, cluster_rep_table, mo):
     mo.hstack([cluster_rep_table,cluster_grid],widths=[1,5])
     return
