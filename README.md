@@ -13,11 +13,11 @@ pip install marimo-chem-utils
 ```
 
 ## Demos
-| Demo      | Open in molab   |
+| Demo      | Purpose | Open in molab   |
 |----------|------------------|     
-Clustering | [![Open in molab](https://molab.marimo.io/molab-shield.svg)](https://molab.marimo.io/notebooks/nb_PdV6rZXyzjf4rjK6Swh7pi)
-| Scatterplot | [![Open in molab](https://molab.marimo.io/molab-shield.svg)](https://molab.marimo.io/notebooks/nb_Y24K3YNMmWXceCSkpZay5w)|
-| REOS Filtering |[![Open in molab](https://molab.marimo.io/molab-shield.svg)](https://molab.marimo.io/notebooks/nb_B7QL9g2moppK1TN2EsXH3o)|
+Clustering | View clustering results | [![Open in molab](https://molab.marimo.io/molab-shield.svg)](https://molab.marimo.io/notebooks/nb_PdV6rZXyzjf4rjK6Swh7pi)
+| Scatterplot | Interactive scatterplot with chemical structures | [![Open in molab](https://molab.marimo.io/molab-shield.svg)](https://molab.marimo.io/notebooks/nb_Y24K3YNMmWXceCSkpZay5w)|
+| REOS Filtering | Review functional group filtering | [![Open in molab](https://molab.marimo.io/molab-shield.svg)](https://molab.marimo.io/notebooks/nb_B7QL9g2moppK1TN2EsXH3o)|
 
 ## Usage
 
@@ -58,15 +58,22 @@ This will create a `pandas.DataFrame` with additional columns for fingerprints, 
 
 The `examples` directory contains marimo notebooks that demonstrate how to use `marimo-chem-utils`. You can run them from the command line.
 
+- **clustering.py**: An example of clustering molecules and viewing the cluster members.
+
+```bash
+marimo edit examples/clustering.py
+```
+
 - **scatterplot.py**: An interactive scatterplot that shows chemical structures as tooltips. Selections on the plot are used to display a grid of molecules.
 
 ```bash
 marimo edit examples/scatterplot.py
 ```
 
-- **clustering.py**: An example of clustering molecules and viewing the cluster members.
+- **reos.py**: An viewer for functional group filters
 
 ```bash
-marimo edit examples/clustering.py
+marimo edit examples/reos.py
 ```
+
 
