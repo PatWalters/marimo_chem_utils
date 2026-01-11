@@ -2,6 +2,8 @@
 
 A collection of cheminformatics utility functions for use with [marimo](https://marimo.io/), an open-source reactive notebook for Python.
 
+<img src="images/mcu_robot.png" width="300">
+
 ## Installation
 
 You can install `marimo-chem-utils` using `pip`:
