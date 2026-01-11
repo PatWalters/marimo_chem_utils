@@ -13,11 +13,11 @@ pip install marimo-chem-utils
 ```
 
 ## Demos
-| Demo      | Purpose | Open in molab   |
-|----------|------------------|     
-Clustering | View clustering results | [![Open in molab](https://molab.marimo.io/molab-shield.svg)](https://molab.marimo.io/notebooks/nb_PdV6rZXyzjf4rjK6Swh7pi)
+| Demo      | Description                                      | Open in molab|     
+|---------- |--------------------------------------------------|--------------|     
+Clustering | View clustering results                          | [![Open in molab](https://molab.marimo.io/molab-shield.svg)](https://molab.marimo.io/notebooks/nb_PdV6rZXyzjf4rjK6Swh7pi)
 | Scatterplot | Interactive scatterplot with chemical structures | [![Open in molab](https://molab.marimo.io/molab-shield.svg)](https://molab.marimo.io/notebooks/nb_Y24K3YNMmWXceCSkpZay5w)|
-| REOS Filtering | Review functional group filtering | [![Open in molab](https://molab.marimo.io/molab-shield.svg)](https://molab.marimo.io/notebooks/nb_B7QL9g2moppK1TN2EsXH3o)|
+| REOS Filtering | Review functional group filtering                | [![Open in molab](https://molab.marimo.io/molab-shield.svg)](https://molab.marimo.io/notebooks/nb_B7QL9g2moppK1TN2EsXH3o)|
 
 ## Usage
 
