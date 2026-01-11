@@ -1,6 +1,6 @@
 # Marimo Chem Utils Examples
 
-This directory contains example [Marimo](https://marimo.io/) notebooks demonstrating the usage of the `marimo_chem_utils` library for cheminformatics tasks.
+This directory contains example [marimo](https://marimo.io/) notebooks demonstrating the usage of the `marimo_chem_utils` library for cheminformatics tasks.
 
 ## Examples
 
