@@ -201,6 +201,7 @@ def interactive_chart(
         y_title: str = "Y",
         image_col: str = "image",
         palette: Optional[Union[str, list]] = "viridis",
+        size: tuple[int, int] = (300, 300),
 ):
     """
     Creates an interactive Altair scatter plot with molecule tooltips and box selection.
@@ -216,6 +217,7 @@ def interactive_chart(
         y_title: The title for the y-axis.
         image_col: Column with base64 images for tooltips.
         palette: The palette to use for color scheme.
+        size: Set the size of the scatter plot.
     """
     # Define which columns to show in the tooltip
     tooltip_cols = [image_col]
@@ -259,6 +261,6 @@ def interactive_chart(
         ),
         color=color_encoding,
         tooltip=[alt.Tooltip(c) for c in tooltip_cols]
-    )
+    ).properties(width=size[0], height=size[1])
 
     return mo.ui.altair_chart(final_chart)

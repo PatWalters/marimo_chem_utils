@@ -35,7 +35,6 @@ def _():
     import pandas as pd
     import marimo_chem_utils as mcu
     import marimo as mo
-    import altair as alt
 
     return mcu, mo, pd
 
@@ -106,7 +105,7 @@ def _(mo):
 
 @app.cell
 def _(df, mcu):
-    tsne_chart = mcu.interactive_chart(df,"TSNE_x","TSNE_y",color_col="pIC50", palette="accent")
+    tsne_chart = mcu.interactive_chart(df,"TSNE_x","TSNE_y",color_col="pIC50", palette="accent", size=(600,600))
     return (tsne_chart,)
 
 
