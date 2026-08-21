@@ -5,7 +5,7 @@
 #     "marimo-chem-utils==0.2.2",
 #     "pandas==2.3.3",
 #     "rdkit==2025.9.3",
-#     "tqdm==4.67.1",
+#     "tqdm>=4.70.0",
 #     "useful-rdkit-utils==0.93",
 # ]
 # ///

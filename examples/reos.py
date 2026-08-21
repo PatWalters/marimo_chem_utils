@@ -11,7 +11,7 @@
 
 import marimo
 
-__generated_with = "0.19.1"
+__generated_with = "0.23.9"
 app = marimo.App(width="full")
 
 
@@ -39,6 +39,7 @@ def _():
     import marimo_chem_utils as mcu
     import pandas as pd
     import marimo as mo
+
     return Chem, mcu, mo, pd, uru
 
 
@@ -60,6 +61,7 @@ def _(Chem, uru):
             return Chem.MolToSmiles(mol)
         else:
             return None
+
     return (strip_salts,)
 
 
@@ -166,7 +168,10 @@ def _(df, left_table, mcu, mo, reos_summary_df):
     if len(left_table.value):
         selected_rule = left_table.value.description.values[0]
         grid_df = df.query(f"reos == '{selected_rule}'").head(12)
-        reos_smarts = reos_summary_df.query(f"description == '{selected_rule}'").SMARTS.values[0]
+        if selected_rule == "ok":
+            reos_smarts = "[Au]"
+        else:
+            reos_smarts = reos_summary_df.query(f"description == '{selected_rule}'").SMARTS.values[0]
         right_grid = mcu.draw_molecule_grid(grid_df,num_cols=4,smarts=reos_smarts)
     else:
         right_grid = mo.md("Please make a selection from the table on the left")
@@ -185,6 +190,11 @@ def _(mo):
 @app.cell
 def _(left_table, mo, right_grid):
     mo.hstack([left_table,right_grid],widths=[1,4])
+    return
+
+
+@app.cell
+def _():
     return
 
 
