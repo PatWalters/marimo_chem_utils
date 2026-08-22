@@ -1,7 +1,7 @@
 """
 A collection of cheminformatics utility functions for use with marimo notebooks.
 """
-from typing import Optional, Tuple
+from typing import Optional, Tuple, Union
 
 import pandas as pd
 import useful_rdkit_utils as uru
@@ -123,7 +123,8 @@ def draw_molecule_grid(df: pd.DataFrame,
             legend_list = [f"{x:.2f}" for x in df_to_show[legend_column].tolist()]
         else:
             legend_list = [str(x) for x in df_to_show[legend_column]]
-    mol_grid = Draw.MolsToGridImage(mol_list, molsPerRow=num_cols, subImgSize=image_size, legends=legend_list, highlightAtomLists=match_list)
+    mol_grid = Draw.MolsToGridImage(mol_list, molsPerRow=num_cols, subImgSize=image_size, legends=legend_list,
+                                    highlightAtomLists=match_list)
     return mol_grid
 
 
@@ -191,14 +192,16 @@ def add_tsne_columns(df: pd.DataFrame, smiles_column: str = "SMILES", fp_column:
 
 
 def interactive_chart(
-    df: pd.DataFrame,
-    x_col: str,
-    y_col: str,
-    color_col: Optional[str] = None,
-    cutoff_value: Optional[float] = None,
-    x_title: str = "X",
-    y_title: str = "Y",
-    image_col: str = "image",
+        df: pd.DataFrame,
+        x_col: str,
+        y_col: str,
+        color_col: Optional[str] = None,
+        cutoff_value: Optional[float] = None,
+        x_title: str = "X",
+        y_title: str = "Y",
+        image_col: str = "image",
+        palette: Optional[Union[str, list]] = "viridis",
+        size: tuple[int, int] = (300, 300),
 ):
     """
     Creates an interactive Altair scatter plot with molecule tooltips and box selection.
@@ -213,6 +216,8 @@ def interactive_chart(
         x_title: The title for the x-axis.
         y_title: The title for the y-axis.
         image_col: Column with base64 images for tooltips.
+        palette: The palette to use for color scheme.
+        size: Set the size of the scatter plot.
     """
     # Define which columns to show in the tooltip
     tooltip_cols = [image_col]
@@ -235,7 +240,7 @@ def interactive_chart(
             # Continuous color scale
             color_encoding = alt.Color(
                 color_col,
-                scale=alt.Scale(scheme='viridis'),
+                scale=alt.Scale(scheme=palette),
                 legend=alt.Legend(title=color_col)
             )
     else:
@@ -256,7 +261,6 @@ def interactive_chart(
         ),
         color=color_encoding,
         tooltip=[alt.Tooltip(c) for c in tooltip_cols]
-    )
+    ).properties(width=size[0], height=size[1])
 
     return mo.ui.altair_chart(final_chart)
-

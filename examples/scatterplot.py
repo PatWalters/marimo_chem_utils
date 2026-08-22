@@ -9,8 +9,8 @@
 
 import marimo
 
-__generated_with = "0.19.1"
-app = marimo.App(width="medium")
+__generated_with = "0.23.16"
+app = marimo.App(width="full")
 
 
 @app.cell(hide_code=True)
@@ -35,6 +35,7 @@ def _():
     import pandas as pd
     import marimo_chem_utils as mcu
     import marimo as mo
+
     return mcu, mo, pd
 
 
@@ -104,7 +105,7 @@ def _(mo):
 
 @app.cell
 def _(df, mcu):
-    tsne_chart = mcu.interactive_chart(df,"TSNE_x","TSNE_y",color_col="pIC50")
+    tsne_chart = mcu.interactive_chart(df,"TSNE_x","TSNE_y",color_col="pIC50", palette="accent", size=(600,600))
     return (tsne_chart,)
 
 
@@ -137,11 +138,6 @@ def _(mo):
 @app.cell
 def _(mo, mol_image, tsne_chart):
     mo.hstack([tsne_chart,mol_image],widths="equal")
-    return
-
-
-@app.cell
-def _():
     return
 
 
